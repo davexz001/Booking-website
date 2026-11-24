@@ -1,6 +1,11 @@
 import { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
-import { PageId, PORTFOLIO_PROJECTS, PortfolioProject } from '../data/content';
+import { ArrowRight, Maximize2 } from 'lucide-react';
+import {
+  PageId,
+  PLATFORM_EXHIBITS,
+  PORTFOLIO_PROJECTS,
+  PortfolioProject,
+} from '../data/content';
 import { BookCoverFrame } from '../components/BookCoverFrame';
 import { EditorialModal } from '../components/EditorialModal';
 
@@ -19,6 +24,12 @@ const GENRE_FILTERS = [
 export function PortfolioPage({ onNavigate }: PortfolioPageProps) {
   const [selectedGenre, setSelectedGenre] = useState('All Genres');
   const [activeProject, setActiveProject] = useState<PortfolioProject | null>(null);
+  const [activeExhibitImage, setActiveExhibitImage] = useState<{
+    src: string;
+    alt: string;
+    caption: string;
+    bookTitle: string;
+  } | null>(null);
 
   const visibleProjects =
     selectedGenre === 'All Genres'
@@ -38,9 +49,9 @@ export function PortfolioPage({ onNavigate }: PortfolioPageProps) {
               Portfolio &amp; Sample Projects
             </h1>
             <p className="mt-4 text-base leading-relaxed text-[#585f69] sm:text-lg">
-              These sample book-marketing analyses illustrate how literary positioning,
-              discoverability observations, and reader-community channels are evaluated across
-              different genres.
+              Platform visibility exhibits and sample book-marketing analyses illustrating how
+              literary positioning, discoverability observations, and reader-community channels are
+              evaluated across genres.
             </p>
           </div>
         </div>
@@ -49,19 +60,139 @@ export function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       {/* Transparency Notice */}
       <section className="border-b border-stone-200/80 bg-[#f1ebe1] py-6">
         <div className="mx-auto max-w-6xl px-6 text-sm leading-relaxed text-[#272d35]">
-          <span className="font-semibold text-[#162231]">Demonstration Designation: </span>
-          Every study currently presented below is an{' '}
+          <span className="font-semibold text-[#162231]">Sample &amp; Reference Designation: </span>
+          Items below include visual platform presentation samples and{' '}
           <span className="font-semibold text-[#162231]">
-            Independent Sample Analysis – Demonstration Project
-          </span>
-          . They demonstrate research methodology and strategic thinking and are not presented as
-          commissioned client work or claimed commercial results.
+            Independent Sample Analysis – Demonstration Projects
+          </span>{' '}
+          to illustrate Amazon and Goodreads positioning, Listopia research, and reader-community
+          strategy without implying official platform affiliation.
+        </div>
+      </section>
+
+      {/* Platform Presentation Samples (Visual Reference Exhibits) */}
+      <section className="border-b border-stone-200/80 bg-white py-14 lg:py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="max-w-2xl">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#7c5c22]">
+              Visual Platform Samples
+            </p>
+            <h2 className="font-serif text-3xl text-[#162231] sm:text-4xl">
+              Amazon &amp; Goodreads Visibility Samples
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-[#585f69] sm:text-base">
+              Visual exhibits demonstrating Goodreads Listopia context, review presentation, blurb
+              formatting, and before-and-after rating visibility across retail and reader
+              platforms. Select any image to inspect full details.
+            </p>
+          </div>
+
+          <div className="mt-10 space-y-8">
+            {PLATFORM_EXHIBITS.map((exhibit) => (
+              <article
+                key={exhibit.id}
+                className="rounded-md border border-stone-200 bg-[#faf7f2] p-6 sm:p-8"
+              >
+                <div className="flex flex-col justify-between gap-4 border-b border-stone-200 pb-6 lg:flex-row lg:items-end">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.13em] text-[#7c5c22]">
+                      {exhibit.designation}
+                    </p>
+                    <h3 className="mt-2 font-serif text-2xl text-[#162231] sm:text-3xl">
+                      {exhibit.title}
+                    </h3>
+                    <p className="mt-1 text-sm text-[#585f69]">
+                      by {exhibit.author} · {exhibit.genre} · {exhibit.focusArea}
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      onNavigate('contact', `${exhibit.focusArea} (${exhibit.genre})`)
+                    }
+                    className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 self-start rounded-sm bg-[#162231] px-4 py-2.5 text-xs font-semibold text-[#faf7f2] transition-colors hover:bg-[#23344a] lg:self-auto"
+                  >
+                    Enquire About Similar Presentation
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+
+                <p className="mt-5 max-w-3xl text-sm leading-relaxed text-[#272d35] sm:text-base">
+                  {exhibit.summary}
+                </p>
+
+                <div
+                  className={`mt-6 grid gap-6 ${
+                    exhibit.images.length > 1 ? 'md:grid-cols-2' : 'grid-cols-1'
+                  }`}
+                >
+                  {exhibit.images.map((img) => (
+                    <figure
+                      key={img.src}
+                      className="overflow-hidden rounded-md border border-stone-200 bg-white p-3"
+                    >
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setActiveExhibitImage({
+                            ...img,
+                            bookTitle: exhibit.title,
+                          })
+                        }
+                        aria-label={`Enlarge ${img.caption} for ${exhibit.title}`}
+                        className="group relative block w-full cursor-pointer overflow-hidden rounded-sm bg-stone-100 text-left"
+                      >
+                        <img
+                          src={img.src}
+                          alt={img.alt}
+                          referrerPolicy="no-referrer"
+                          className="w-full object-contain transition-transform duration-200 group-hover:scale-[1.01]"
+                        />
+                        <span className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-[#162231]">
+                          <Maximize2 className="h-3.5 w-3.5 text-[#7c5c22]" />
+                          Inspect Full-Size Exhibit
+                        </span>
+                      </button>
+                      <figcaption className="mt-2 px-1 text-xs font-serif italic text-[#585f69]">
+                        {img.caption}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+
+                <div className="mt-6 border-t border-stone-200 pt-5">
+                  <h4 className="font-sans text-xs font-semibold uppercase tracking-[0.12em] text-[#162231]">
+                    Key Presentation Takeaways
+                  </h4>
+                  <ul className="mt-2.5 grid gap-2 text-sm text-[#585f69] md:grid-cols-3">
+                    {exhibit.observations.map((obs) => (
+                      <li key={obs} className="flex items-start gap-2">
+                        <span aria-hidden="true" className="text-[#7c5c22]">
+                          —
+                        </span>
+                        <span>{obs}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Filters & Case Study Stack */}
       <section className="py-14 lg:py-20">
         <div className="mx-auto max-w-6xl px-6">
+          <div className="mb-8 max-w-2xl">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#7c5c22]">
+              Demonstration Case Studies
+            </p>
+            <h2 className="font-serif text-3xl text-[#162231] sm:text-4xl">
+              Independent Sample Analyses by Genre
+            </h2>
+          </div>
           <div
             role="group"
             aria-label="Filter sample projects by genre"
@@ -270,6 +401,34 @@ export function PortfolioPage({ onNavigate }: PortfolioPageProps) {
               >
                 Discuss Your Own Book
               </button>
+            </div>
+          </div>
+        )}
+      </EditorialModal>
+      {/* Full-Size Exhibit Inspection Modal */}
+      <EditorialModal
+        isOpen={Boolean(activeExhibitImage)}
+        onClose={() => setActiveExhibitImage(null)}
+        title={activeExhibitImage?.bookTitle || 'Platform Exhibit'}
+      >
+        {activeExhibitImage && (
+          <div className="space-y-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7c5c22]">
+                Platform Presentation Sample
+              </p>
+              <h2 className="mt-1 font-serif text-2xl text-[#162231]">
+                {activeExhibitImage.bookTitle}
+              </h2>
+              <p className="mt-1 text-sm text-[#585f69]">{activeExhibitImage.caption}</p>
+            </div>
+            <div className="overflow-hidden rounded-sm border border-stone-200 bg-stone-50 p-2">
+              <img
+                src={activeExhibitImage.src}
+                alt={activeExhibitImage.alt}
+                referrerPolicy="no-referrer"
+                className="w-full object-contain"
+              />
             </div>
           </div>
         )}

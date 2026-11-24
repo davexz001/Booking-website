@@ -58,6 +58,22 @@ export interface ResourceArticle {
   sections: { heading: string; body: string }[];
 }
 
+export interface PlatformExhibit {
+  id: string;
+  designation: string;
+  title: string;
+  author: string;
+  genre: string;
+  focusArea: string;
+  summary: string;
+  observations: string[];
+  images: {
+    src: string;
+    alt: string;
+    caption: string;
+  }[];
+}
+
 export const SITE_IMAGES = {
   heroDesk: '/src/assets/images/hero_literary_desk_1795479876146.jpg',
   aboutStudy: '/src/assets/images/about_reading_study_1795479875948.jpg',
@@ -65,6 +81,80 @@ export const SITE_IMAGES = {
   coverRooted: '/src/assets/images/cover_civic_trees_1795479877551.jpg',
   coverEchoes: '/src/assets/images/cover_winter_stanzas_1795479878300.jpg',
 };
+
+export const PLATFORM_EXHIBITS: PlatformExhibit[] = [
+  {
+    id: 'unbroken-legacy-goodreads',
+    designation: 'Platform Presentation Sample – Visual Reference',
+    title: 'Unbroken Legacy: The Divine Seed',
+    author: 'Corey S. Wolff',
+    genre: 'Speculative & Self-Discovery Fiction',
+    focusArea: 'Goodreads Listopia Context & Reader Review Presentation',
+    summary:
+      'Illustrates how thematic Goodreads Listopia placement ("Best Self-Discovery Books") and clear, thoughtful reader reviews reinforce genre positioning and reader trust on Goodreads.',
+    observations: [
+      'Positioned within a theme-specific Listopia list aligned with inner-journey and self-discovery readers.',
+      'Consistent Goodreads Author profile linking, edition cover presentation, and organized reader-review display.',
+      'Demonstrates how reader reflection and thematic list alignment support organic discovery alongside retail links.',
+    ],
+    images: [
+      {
+        src: '/assets/aistudio/1000265529_991e941a.jpg',
+        alt: 'Goodreads Listopia Best Self-Discovery Books list featuring Unbroken Legacy: The Divine Seed by Corey S. Wolff',
+        caption: 'Goodreads Listopia Context — "Best Self-Discovery Books"',
+      },
+      {
+        src: '/assets/aistudio/1000265530_a8b6496d.jpg',
+        alt: 'Goodreads book page and reader reviews for Unbroken Legacy: The Divine Seed by Corey S. Wolff',
+        caption: 'Goodreads Book Page & Reader Review Presentation',
+      },
+    ],
+  },
+  {
+    id: 'try-again-baby-comparison',
+    designation: 'Platform Presentation Sample – Visual Reference',
+    title: 'Try Again, Baby: A Secret Baby Romance (The Wells Brothers)',
+    author: 'Julia Wolf',
+    genre: 'Contemporary Romance',
+    focusArea: 'Amazon & Goodreads Social Proof Comparison',
+    summary:
+      'Before-and-after platform presentation reference illustrating the contrast between early listing visibility and an established cross-platform reader footprint across Amazon and Goodreads.',
+    observations: [
+      'Clear series navigation ("Part of: The Wells Brothers") and Kindle/Paperback format linking.',
+      'Structured opening hook with readable line breaks and bolded narrative beats for fast browser scanning.',
+      'Cross-platform rating visibility reflected across both Amazon customer reviews and Goodreads ratings.',
+    ],
+    images: [
+      {
+        src: '/assets/aistudio/1000265527_d048408c.jpg',
+        alt: 'Before and after optimization comparison for Try Again, Baby by Julia Wolf showing Amazon and Goodreads rating counts',
+        caption: 'Before & After Platform Visibility Comparison — Amazon & Goodreads',
+      },
+    ],
+  },
+  {
+    id: 'love-he-denied-comparison',
+    designation: 'Platform Presentation Sample – Visual Reference',
+    title: 'Love He Denied: A Left at the Altar, Second Chance Romance',
+    author: 'M.L. Hall',
+    genre: 'Contemporary Romance',
+    focusArea: 'Amazon Listing Structure & Reader Rating Visibility',
+    summary:
+      'Side-by-side Amazon Kindle Store presentation sample highlighting subtitle keyword clarity, category breadcrumbs, formatted blurb pacing, and cross-platform rating growth.',
+    observations: [
+      'Explicit trope and subgenre clarity in the title/subtitle and category path (Romance > Billionaires & Millionaires).',
+      'Cleanly spaced description paragraphs opening with an immediate dramatic premise.',
+      'Illustrative comparison of before-and-after reader rating counts across Amazon and Goodreads.',
+    ],
+    images: [
+      {
+        src: '/assets/aistudio/1000265528_883661ac.jpg',
+        alt: 'Before and after comparison for Love He Denied by M.L. Hall showing Amazon and Goodreads rating counts',
+        caption: 'Side-by-Side Listing & Reader Rating Comparison — Amazon & Goodreads',
+      },
+    ],
+  },
+];
 
 export const SERVICES: ServiceItem[] = [
   {
