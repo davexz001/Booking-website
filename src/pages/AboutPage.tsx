@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
-import { PageId, SITE_IMAGES } from '../data/content';
+import { PageId } from '../data/content';
 
 interface AboutPageProps {
   onNavigate: (page: PageId) => void;
@@ -35,7 +35,7 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
             <figure className="overflow-hidden rounded-md border border-stone-200 bg-white p-3">
               {!studyImgError ? (
                 <img
-                  src={SITE_IMAGES.aboutStudy}
+                  src="/images/becky-ronald.jpg"
                   alt="Quiet private literary library with oak bookshelves, armchair, and open notebooks in afternoon light"
                   referrerPolicy="no-referrer"
                   onError={() => setStudyImgError(true)}

@@ -76,7 +76,7 @@ export interface PlatformExhibit {
 
 export const SITE_IMAGES = {
   heroDesk: '/src/assets/images/hero_literary_desk_1795479876146.jpg',
-  aboutStudy: '/src/assets/images/about_reading_study_1795479875948.jpg',
+  aboutStudy: '/images/becky-ronald.jpg',
   coverSaltwater: '/src/assets/images/cover_saltwater_ledger_1795479877251.jpg',
   coverRooted: '/src/assets/images/cover_civic_trees_1795479877551.jpg',
   coverEchoes: '/src/assets/images/cover_winter_stanzas_1795479878300.jpg',

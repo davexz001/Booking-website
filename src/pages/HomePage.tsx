@@ -358,42 +358,44 @@ export function HomePage({ onNavigate }: HomePageProps) {
               </p>
             </div>
 
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {PLATFORM_EXHIBITS.map((exhibit) => (
-                <article
-                  key={exhibit.id}
-                  className="flex flex-col justify-between rounded-md border border-stone-200 bg-[#faf7f2] p-5"
-                >
-                  <div>
-                    <div className="overflow-hidden rounded-sm border border-stone-200 bg-white p-2">
-                      <img
-                        src={exhibit.images[0].src}
-                        alt={exhibit.images[0].alt}
-                        referrerPolicy="no-referrer"
-                        className="aspect-[4/3] w-full object-cover object-top"
-                      />
+            <div className="mt-8 grid gap-6 md:grid-cols-2">
+              {PLATFORM_EXHIBITS.flatMap((exhibit) =>
+                exhibit.images.map((img) => (
+                  <article
+                    key={img.src}
+                    className="flex flex-col justify-between rounded-md border border-stone-200 bg-[#faf7f2] p-5"
+                  >
+                    <div>
+                      <div className="overflow-hidden rounded-sm border border-stone-200 bg-white p-2">
+                        <img
+                          src={img.src}
+                          alt={img.alt}
+                          referrerPolicy="no-referrer"
+                          className="aspect-[16/10] w-full object-contain bg-stone-50"
+                        />
+                      </div>
+                      <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7c5c22]">
+                        {img.caption}
+                      </p>
+                      <h4 className="mt-1.5 font-serif text-xl text-[#162231]">{exhibit.title}</h4>
+                      <p className="mt-1 text-xs text-[#585f69]">
+                        by {exhibit.author} · {exhibit.genre}
+                      </p>
                     </div>
-                    <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7c5c22]">
-                      {exhibit.focusArea}
-                    </p>
-                    <h4 className="mt-1.5 font-serif text-xl text-[#162231]">{exhibit.title}</h4>
-                    <p className="mt-1 text-xs text-[#585f69]">
-                      by {exhibit.author} · {exhibit.genre}
-                    </p>
-                  </div>
 
-                  <div className="mt-4 border-t border-stone-200 pt-3">
-                    <button
-                      type="button"
-                      onClick={() => onNavigate('portfolio')}
-                      className="inline-flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-[#162231] hover:text-[#7c5c22]"
-                    >
-                      Inspect Full Exhibit in Portfolio
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
-                </article>
-              ))}
+                    <div className="mt-4 border-t border-stone-200 pt-3">
+                      <button
+                        type="button"
+                        onClick={() => onNavigate('portfolio')}
+                        className="inline-flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-[#162231] hover:text-[#7c5c22]"
+                      >
+                        Inspect Full Exhibit in Portfolio
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  </article>
+                ))
+              )}
             </div>
           </div>
 
